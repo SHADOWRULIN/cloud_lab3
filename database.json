@@ -1,0 +1,189 @@
+{
+    "site": {
+        "name": "Nova",
+        "logo": "Nov<span>a</span>",
+        "title": "Nova — Work Smarter, Together",
+        "badge": "Now available worldwide",
+        "heroTitle": "Work smarter. <span class=\"gradient-text\">Move faster.</span>",
+        "heroDescription": "Nova brings your projects, people, tasks and conversations together in one beautifully simple workspace.",
+        "footerDescription": "A modern workspace designed to help teams work smarter, collaborate better and move faster.",
+        "year": 2026
+    },
+
+    "dashboard": {
+        "avatar": "JD",
+
+        "stats": [
+            {
+                "label": "Projects",
+                "value": "24"
+            },
+            {
+                "label": "Tasks",
+                "value": "148"
+            },
+            {
+                "label": "Complete",
+                "value": "86%"
+            }
+        ],
+
+        "chart": [
+            35,
+            55,
+            42,
+            72,
+            62,
+            88,
+            76,
+            96
+        ]
+    },
+
+    "companies": [
+        "ACME",
+        "Vertex",
+        "Orbit",
+        "PixelCo",
+        "Cloudly"
+    ],
+
+    "features": [
+        {
+            "icon": "⚡",
+            "title": "Lightning fast",
+            "description": "Keep your workflow moving with a fast, responsive workspace designed for modern teams."
+        },
+
+        {
+            "icon": "👥",
+            "title": "Team collaboration",
+            "description": "Bring everyone together with shared projects, comments, files and real-time updates."
+        },
+
+        {
+            "icon": "📊",
+            "title": "Smart analytics",
+            "description": "Understand your team's performance with clear dashboards and actionable insights."
+        },
+
+        {
+            "icon": "🔒",
+            "title": "Enterprise security",
+            "description": "Keep your organization's information secure with modern security controls and permissions."
+        },
+
+        {
+            "icon": "🔄",
+            "title": "Easy automation",
+            "description": "Automate repetitive tasks and create workflows that keep projects moving automatically."
+        },
+
+        {
+            "icon": "🌎",
+            "title": "Work anywhere",
+            "description": "Access your workspace from any device and stay connected wherever you work."
+        }
+    ],
+
+    "pricing": [
+        {
+            "name": "Starter",
+            "description": "For individuals and small projects.",
+            "price": "$0",
+            "period": "/month",
+            "button": "Get started",
+            "popular": false,
+
+            "features": [
+                "Up to 3 projects",
+                "5 team members",
+                "Basic analytics",
+                "1 GB storage",
+                "Community support"
+            ]
+        },
+
+        {
+            "name": "Pro",
+            "description": "For growing teams.",
+            "price": "$19",
+            "period": "/user/month",
+            "button": "Start free trial",
+            "popular": true,
+
+            "features": [
+                "Unlimited projects",
+                "Unlimited team members",
+                "Advanced analytics",
+                "100 GB storage",
+                "Priority support"
+            ]
+        },
+
+        {
+            "name": "Enterprise",
+            "description": "For large organizations.",
+            "price": "Custom",
+            "period": "",
+            "button": "Contact sales",
+            "popular": false,
+
+            "features": [
+                "Everything in Pro",
+                "Advanced permissions",
+                "SSO & security",
+                "Unlimited storage",
+                "Dedicated support"
+            ]
+        }
+    ],
+
+    "testimonials": [
+        {
+            "rating": 5,
+            "text": "Nova completely changed how our team works. Everything is finally in one place and we spend less time searching for information.",
+            "name": "Alex Morgan",
+            "role": "Product Manager",
+            "initials": "AM"
+        },
+
+        {
+            "rating": 5,
+            "text": "The interface is incredibly clean. Our team started using it immediately without needing hours of training.",
+            "name": "Sarah Khan",
+            "role": "Startup Founder",
+            "initials": "SK"
+        },
+
+        {
+            "rating": 5,
+            "text": "The analytics alone have helped us understand where our projects were getting stuck.",
+            "name": "James Davis",
+            "role": "Engineering Lead",
+            "initials": "JD"
+        }
+    ],
+
+    "faq": [
+        {
+            "question": "Is Nova free to use?",
+            "answer": "Yes. Nova has a free plan for individuals and small teams. You can upgrade whenever you need more features."
+        },
+
+        {
+            "question": "Can I cancel at any time?",
+            "answer": "Absolutely. There are no long-term contracts. You can cancel your subscription whenever you want."
+        },
+
+        {
+            "question": "Does Nova work on mobile?",
+            "answer": "Yes. The website is fully responsive and works across phones, tablets and desktop devices."
+        },
+
+        {
+            "question": "Can I invite my team?",
+            "answer": "Yes. You can invite team members and assign them projects, tasks and permissions."
+        }
+    ]
+}
