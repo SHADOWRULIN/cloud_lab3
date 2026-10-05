@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Nova - A modern productivity platform for teams and individuals.">
+    <meta name="author" content="Nova">
+
+    <title>Nova — Work Smarter, Together</title>
+
+    <style>
+        /* =========================
+           RESET & GLOBAL STYLES
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --text: #334155;
+            --muted: #64748b;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --radius: 16px;
+            --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.15;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 13px 22px;
+            border-radius: 10px;
+            border: none;
+
+            font-weight: 700;
+            transition: 0.25s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--dark);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-large {
+            padding: 16px 28px;
+            font-size: 1rem;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+        }
+
+        .navbar {
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-btn {
+            display: none;
+            border: none;
+            background: transparent;
+            font-size: 1.7rem;
+            color: var(--dark);
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            padding: 110px 0 100px;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(99, 102, 241, 0.13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(139, 92, 246, 0.12),
+                    transparent 30%
+                ),
+                #fff;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #eef2ff;
+            color: var(--primary);
+
+            padding: 7px 12px;
+            border-radius: 999px;
+
+            font-size: 0.85rem;
+            font-weight: 700;
+
+            margin-bottom: 22px;
+        }
+
+        .badge::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.02;
+            color: var(--dark);
+            letter-spacing: -0.04em;
+            margin-bottom: 25px;
+        }
+
+        .hero-description {
+            max-width: 600px;
+            color: var(--muted);
+            font-size: 1.12rem;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-note {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* Dashboard mockup */
+
+        .dashboard {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+
+            padding: 16px;
+
+            transform: perspective(1200px) rotateY(-5deg) rotateX(3deg);
+            transition: 0.4s ease;
+        }
+
+        .dashboard:hover {
+            transform: perspective(1200px) rotateY(0) rotateX(0);
+        }
+
+        .dashboard-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 8px 4px 16px;
+        }
+
+        .dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .dots span {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+
+        .dashboard-title {
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .dashboard-body {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            min-height: 390px;
+
+            background: #f8fafc;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background: #111827;
+            padding: 15px 10px;
+        }
+
+        .side-icon {
+            height: 42px;
+            margin-bottom: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #94a3b8;
+            border-radius: 8px;
+        }
+
+        .side-icon.active {
+            color: white;
+            background: var(--primary);
+        }
+
+        .dashboard-main {
+            padding: 22px;
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .dash-header h3 {
+            color: var(--dark);
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .stat small {
+            color: var(--muted);
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--dark);
+            font-size: 1.4rem;
+            margin-top: 3px;
+        }
+
+        .chart {
+            height: 150px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: end;
+            gap: 9px;
+            padding: 18px;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(
+                to top,
+                var(--primary),
+                #a78bfa
+            );
+            border-radius: 5px 5px 0 0;
+        }
+
+        /* =========================
+           TRUST
+        ========================== */
+
+        .trust {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 30px 0;
+        }
+
+        .trust-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .trust-text {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        /* =========================
+           FEATURES
+        ========================== */
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            transition: 0.3s ease;
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+            border-color: #c7d2fe;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+            background: #eef2ff;
+
+            color: var(--primary);
+            font-size: 1.4rem;
+
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================
+           SHOWCASE
+        ========================== */
+
+        .showcase {
+            background: var(--light);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .showcase-image {
+            background: #111827;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .code-window {
+            color: #e2e8f0;
+            font-family: "Courier New", monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .code-purple {
+            color: #c084fc;
+        }
+
+        .code-blue {
+            color: #60a5fa;
+        }
+
+        .code-green {
+            color: #4ade80;
+        }
+
+        .showcase-text .badge {
+            margin-bottom: 15px;
+        }
+
+        .showcase-text h2 {
+            color: var(--dark);
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .showcase-text > p {
+            color: var(--muted);
+            margin-bottom: 25px;
+        }
+
+        .check-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+
+        .check {
+            width: 22px;
+            height: 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* =========================
+           PRICING
+        ========================== */
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .price-card {
+            position: relative;
+
+            padding: 35px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: white;
+        }
+
+        .price-card.popular {
+            border: 2px solid var(--primary);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.14);
+        }
+
+        .popular-label {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            background: var(--primary);
+            color: white;
+
+            padding: 5px 14px;
+            border-radius: 999px;
+
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .price-card h3 {
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+
+        .price-card > p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin: 8px 0 20px;
+        }
+
+        .price {
+            color: var(--dark);
+            font-size: 2.7rem;
+            font-weight: 900;
+        }
+
+        .price span {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .price-card .btn {
+            width: 100%;
+            margin: 25px 0;
+        }
+
+        .price-features {
+            display: grid;
+            gap: 13px;
+        }
+
+        .price-features li {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        /* =========================
+           TESTIMONIALS
+        ========================== */
+
+        .testimonials {
+            background: var(--light);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .testimonial {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+        }
+
+        .stars {
+            color: #f59e0b;
+            margin-bottom: 18px;
+        }
+
+        .testimonial p {
+            color: var(--text);
+            margin-bottom: 22px;
+        }
+
+        .person {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .person-avatar {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: white;
+            font-weight: 800;
+
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #ec4899
+            );
+        }
+
+        .person strong {
+            color: var(--dark);
+            display: block;
+        }
+
+        .person small {
+            color: var(--muted);
+        }
+
+        /* =========================
+           FAQ
+        ========================== */
+
+        .faq {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 22px 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: transparent;
+            border: none;
+
+            color: var(--dark);
+            text-align: left;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .faq-question span {
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+
+            color: var(--muted);
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer p {
+            padding-bottom: 20px;
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(45deg);
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            padding: 80px 0;
+        }
+
+        .cta-box {
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(255, 255, 255, 0.2),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+            border-radius: 25px;
+
+            padding: 70px 40px;
+            text-align: center;
+        }
+
+        .cta-box h2 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            max-width: 600px;
+            margin: 0 auto 28px;
+            color: #ddd6fe;
+        }
+
+        .cta-box .btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .cta-box .btn:hover {
+            transform: translateY(-2px);
+            background: #f8fafc;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 70px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand .logo {
+            color: white;
+        }
+
+        .footer-brand p {
+            max-width: 330px;
+            color: #94a3b8;
+            margin-top: 15px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 18px;
+        }
+
+        .footer-column ul {
+            display: grid;
+            gap: 11px;
+        }
+
+        .footer-column a {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 25px;
+            border-top: 1px solid #1e293b;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        /* =========================
+           SCROLL TOP
+        ========================== */
+
+        .scroll-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+
+            width: 45px;
+            height: 45px;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
+            border-radius: 50%;
+
+            background: var(--primary);
+            color: white;
+
+            box-shadow: var(--shadow);
+            z-index: 999;
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================== */
+
+        @media (max-width: 900px) {
+            .hero-content,
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .dashboard {
+                max-width: 700px;
+                margin: auto;
+            }
+
+            .features-grid,
+            .pricing-grid,
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .trust-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .nav-links,
+            .nav-buttons {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .navbar.mobile-open {
+                position: relative;
+            }
+
+            .navbar.mobile-open .nav-links {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 18px;
+
+                top: 75px;
+                left: 0;
+                right: 0;
+
+                padding: 25px;
+
+                background: white;
+                border: 1px solid var(--border);
+                box-shadow: var(--shadow);
+            }
+
+            .navbar.mobile-open .nav-buttons {
+                position: absolute;
+                display: flex;
+
+                top: 330px;
+                left: 0;
+                right: 0;
+
+                padding: 20px 25px;
+
+                background: white;
+                border: 1px solid var(--border);
+                border-top: none;
+            }
+
+            .features-grid,
+            .pricing-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-body {
+                grid-template-columns: 55px 1fr;
+            }
+
+            .logos {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .section {
+                padding: 75px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.7rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .dashboard-main {
+                padding: 12px;
+            }
+
+            .chart {
+                gap: 4px;
+                padding: 10px;
+            }
+
+            .cta-box {
+                padding: 50px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <header>
+        <div class="container">
+            <nav class="navbar" id="navbar">
+
+                <a href="#" class="logo">
+                    Nov<span>a</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#solutions">Solutions</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#testimonials">Reviews</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+
+                <div class="nav-buttons">
+                    <a href="#" class="btn btn-outline">Log in</a>
+                    <a href="#pricing" class="btn btn-primary">Get Started</a>
+                </div>
+
+                <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+                    ☰
+                </button>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <main>
+
+        <section class="hero">
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <div>
+                        <div class="badge">
+                            Now available worldwide
+                        </div>
+
+                        <h1>
+                            Work smarter.
+                            <span class="gradient-text">
+                                Move faster.
+                            </span>
+                        </h1>
+
+                        <p class="hero-description">
+                            Nova brings your projects, people, tasks and
+                            conversations together in one beautifully simple
+                            workspace.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a href="#pricing" class="btn btn-primary btn-large">
+                                Start for free →
+                            </a>
+
+                            <a href="#solutions" class="btn btn-outline btn-large">
+                                Explore features
+                            </a>
+                        </div>
+
+                        <p class="hero-note">
+                            ✓ No credit card required &nbsp; • &nbsp;
+                            ✓ Free 14-day trial
+                        </p>
+                    </div>
+
+
+                    <!-- Dashboard Mockup -->
+
+                    <div class="dashboard">
+
+                        <div class="dashboard-top">
+
+                            <div class="dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <div class="dashboard-title">
+                                Nova Dashboard
+                            </div>
+
+                            <div></div>
+
+                        </div>
+
+                        <div class="dashboard-body">
+
+                            <aside class="sidebar">
+
+                                <div class="side-icon active">
+                                    ⌂
+                                </div>
+
+                                <div class="side-icon">
+                                    ◫
+                                </div>
+
+                                <div class="side-icon">
+                                    ✓
+                                </div>
+
+                                <div class="side-icon">
+                                    ♢
+                                </div>
+
+                                <div class="side-icon">
+                                    ⚙
+                                </div>
+
+                            </aside>
+
+                            <div class="dashboard-main">
+
+                                <div class="dash-header">
+                                    <h3>Overview</h3>
+                                    <div class="avatar">JD</div>
+                                </div>
+
+                                <div class="stats">
+
+                                    <div class="stat">
+                                        <small>Projects</small>
+                                        <strong>24</strong>
+                                    </div>
+
+                                    <div class="stat">
+                                        <small>Tasks</small>
+                                        <strong>148</strong>
+                                    </div>
+
+                                    <div class="stat">
+                                        <small>Complete</small>
+                                        <strong>86%</strong>
+                                    </div>
+
+                                </div>
+
+                                <div class="chart">
+                                    <div class="bar" style="height: 35%"></div>
+                                    <div class="bar" style="height: 55%"></div>
+                                    <div class="bar" style="height: 42%"></div>
+                                    <div class="bar" style="height: 72%"></div>
+                                    <div class="bar" style="height: 62%"></div>
+                                    <div class="bar" style="height: 88%"></div>
+                                    <div class="bar" style="height: 76%"></div>
+                                    <div class="bar" style="height: 96%"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             TRUST
+        ========================== -->
+
+        <section class="trust">
+            <div class="container">
+
+                <div class="trust-content">
+
+                    <div class="trust-text">
+                        Trusted by teams at
+                    </div>
+
+                    <div class="logos">
+                        <span>ACME</span>
+                        <span>Vertex</span>
+                        <span>Orbit</span>
+                        <span>PixelCo</span>
+                        <span>Cloudly</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================
+             FEATURES
+        ========================== -->
+
+        <section class="section" id="features">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>
+                        Everything your team needs
+                    </h2>
+
+                    <p>
+                        Powerful tools designed to remove busywork and help
+                        your team focus on what actually matters.
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            ⚡
+                        </div>
+
+                        <h3>
+                            Lightning fast
+                        </h3>
+
+                        <p>
+                            Keep your workflow moving with a fast,
+                            responsive workspace designed for modern teams.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            👥
+                        </div>
+
+                        <h3>
+                            Team collaboration
+                        </h3>
+
+                        <p>
+                            Bring everyone together with shared projects,
+                            comments, files and real-time updates.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            📊
+                        </div>
+
+                        <h3>
+                            Smart analytics
+                        </h3>
+
+                        <p>
+                            Understand your team's performance with clear
+                            dashboards and actionable insights.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            🔒
+                        </div>
+
+                        <h3>
+                            Enterprise security
+                        </h3>
+
+                        <p>
+                            Keep your organization's information secure with
+                            modern security controls and permissions.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            🔄
+                        </div>
+
+                        <h3>
+                            Easy automation
+                        </h3>
+
+                        <p>
+                            Automate repetitive tasks and create workflows
+                            that keep projects moving automatically.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            🌎
+                        </div>
+
+                        <h3>
+                            Work anywhere
+                        </h3>
+
+                        <p>
+                            Access your workspace from any device and stay
+                            connected wherever you work.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SHOWCASE
+        ========================== -->
+
+        <section class="section showcase" id="solutions">
+
+            <div class="container">
+
+                <div class="showcase-grid">
+
+                    <div class="showcase-image">
+
+<pre class="code-window"><span class="code-purple">const</span> project = {
+    <span class="code-blue">name</span>: <span class="code-green">"Website Redesign"</span>,
+    <span class="code-blue">status</span>: <span class="code-green">"In Progress"</span>,
+    <span class="code-blue">progress</span>: <span class="code-green">86</span>,
+    <span class="code-blue">team</span>: [
+        <span class="code-green">"Alex"</span>,
+        <span class="code-green">"Sarah"</span>,
+        <span class="code-green">"John"</span>
+    ],
+    <span class="code-blue">deadline</span>: <span class="code-green">"Friday"</span>
+};
+
+<span class="code-purple">await</span> nova.launch(project);</pre>
+
+                    </div>
+
+
+                    <div class="showcase-text">
+
+                        <div class="badge">
+                            Built for modern teams
+                        </div>
+
+                        <h2>
+                            Turn ideas into
+                            <span class="gradient-text">
+                                results.
+                            </span>
+                        </h2>
+
+                        <p>
+                            From your first idea to final delivery, Nova
+                            gives your team a single place to plan, build,
+                            communicate and measure progress.
+                        </p>
+
+                        <ul class="check-list">
+
+                            <li>
+                                <span class="check">✓</span>
+                                Organize projects in seconds
+                            </li>
+
+                            <li>
+                                <span class="check">✓</span>
+                                Assign tasks to your team
+                            </li>
+
+                            <li>
+                                <span class="check">✓</span>
+                                Track deadlines automatically
+                            </li>
+
+                            <li>
+                                <span class="check">✓</span>
+                                Get powerful performance reports
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRICING
+        ========================== -->
+
+        <section class="section" id="pricing">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>
+                        Simple, transparent pricing
+                    </h2>
+
+                    <p>
+                        Start free and upgrade when your team grows.
+                    </p>
+
+                </div>
+
+
+                <div class="pricing-grid">
+
+                    <!-- Starter -->
+
+                    <article class="price-card">
+
+                        <h3>Starter</h3>
+
+                        <p>
+                            For individuals and small projects.
+                        </p>
+
+                        <div class="price">
+                            $0
+                            <span>/month</span>
+                        </div>
+
+                        <a href="#" class="btn btn-outline">
+                            Get started
+                        </a>
+
+                        <ul class="price-features">
+                            <li>✓ Up to 3 projects</li>
+                            <li>✓ 5 team members</li>
+                            <li>✓ Basic analytics</li>
+                            <li>✓ 1 GB storage</li>
+                            <li>✓ Community support</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Pro -->
+
+                    <article class="price-card popular">
+
+                        <div class="popular-label">
+                            MOST POPULAR
+                        </div>
+
+                        <h3>Pro</h3>
+
+                        <p>
+                            For growing teams.
+                        </p>
+
+                        <div class="price">
+                            $19
+                            <span>/user/month</span>
+                        </div>
+
+                        <a href="#" class="btn btn-primary">
+                            Start free trial
+                        </a>
+
+                        <ul class="price-features">
+                            <li>✓ Unlimited projects</li>
+                            <li>✓ Unlimited team members</li>
+                            <li>✓ Advanced analytics</li>
+                            <li>✓ 100 GB storage</li>
+                            <li>✓ Priority support</li>
+                        </ul>
+
+                    </article>
+
+
+                    <!-- Enterprise -->
+
+                    <article class="price-card">
+
+                        <h3>Enterprise</h3>
+
+                        <p>
+                            For large organizations.
+                        </p>
+
+                        <div class="price">
+                            Custom
+                        </div>
+
+                        <a href="#contact" class="btn btn-outline">
+                            Contact sales
+                        </a>
+
+                        <ul class="price-features">
+                            <li>✓ Everything in Pro</li>
+                            <li>✓ Advanced permissions</li>
+                            <li>✓ SSO & security</li>
+                            <li>✓ Unlimited storage</li>
+                            <li>✓ Dedicated support</li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TESTIMONIALS
+        ========================== -->
+
+        <section class="section testimonials" id="testimonials">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>
+                        Loved by productive teams
+                    </h2>
+
+                    <p>
+                        See why teams choose Nova to organize their work.
+                    </p>
+
+                </div>
+
+
+                <div class="testimonial-grid">
+
+                    <article class="testimonial">
+
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            "Nova completely changed how our team works.
+                            Everything is finally in one place and we spend
+                            less time searching for information."
+                        </p>
+
+                        <div class="person">
+
+                            <div class="person-avatar">
+                                AM
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Alex Morgan
+                                </strong>
+
+                                <small>
+                                    Product Manager
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="testimonial">
+
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            "The interface is incredibly clean. Our team
+                            started using it immediately without needing
+                            hours of training."
+                        </p>
+
+                        <div class="person">
+
+                            <div class="person-avatar">
+                                SK
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Sarah Khan
+                                </strong>
+
+                                <small>
+                                    Startup Founder
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="testimonial">
+
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            "The analytics alone have helped us understand
+                            where our projects were getting stuck."
+                        </p>
+
+                        <div class="person">
+
+                            <div class="person-avatar">
+                                JD
+                            </div>
+
+                            <div>
+                                <strong>
+                                    James Davis
+                                </strong>
+
+                                <small>
+                                    Engineering Lead
+                                </small>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FAQ
+        ========================== -->
+
+        <section class="section" id="faq">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>
+                        Frequently asked questions
+                    </h2>
+
+                    <p>
+                        Everything you need to know before getting started.
+                    </p>
+
+                </div>
+
+
+                <div class="faq">
+
+                    <div class="faq-item">
+
+                        <button class="faq-question">
+                            Is Nova free to use?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            <p>
+                                Yes. Nova has a free plan for individuals
+                                and small teams. You can upgrade whenever
+                                you need more features.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question">
+                            Can I cancel at any time?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            <p>
+                                Absolutely. There are no long-term contracts.
+                                You can cancel your subscription whenever
+                                you want.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question">
+                            Does Nova work on mobile?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            <p>
+                                Yes. The website is fully responsive and
+                                works across phones, tablets and desktop
+                                devices.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button class="faq-question">
+                            Can I invite my team?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer">
+                            <p>
+                                Yes. You can invite team members and assign
+                                them projects, tasks and permissions.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CTA
+        ========================== -->
+
+        <section class="cta" id="contact">
+
+            <div class="container">
+
+                <div class="cta-box">
+
+                    <h2>
+                        Ready to work smarter?
+                    </h2>
+
+                    <p>
+                        Join thousands of teams using Nova to turn ideas
+                        into meaningful results.
+                    </p>
+
+                    <a href="#" class="btn btn-large">
+                        Get started for free →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <a href="#" class="logo">
+                        Nov<span>a</span>
+                    </a>
+
+                    <p>
+                        A modern workspace designed to help teams work
+                        smarter, collaborate better and move faster.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>Product</h4>
+
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>Company</h4>
+
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>Legal</h4>
+
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 Nova. All rights reserved.
+                </span>
+
+                <span>
+                    Made with ♥ for productive teams.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Scroll to top button -->
+
+    <button
+        class="scroll-top"
+        id="scrollTop"
+        aria-label="Scroll to top"
+    >
+        ↑
+    </button>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        // -------------------------
+        // MOBILE MENU
+        // -------------------------
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navbar = document.getElementById("navbar");
+
+        menuBtn.addEventListener("click", () => {
+            navbar.classList.toggle("mobile-open");
+
+            if (navbar.classList.contains("mobile-open")) {
+                menuBtn.textContent = "✕";
+            } else {
+                menuBtn.textContent = "☰";
+            }
+        });
+
+
+        // Close mobile menu after clicking a navigation link
+
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        navLinks.forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navbar.classList.remove("mobile-open");
+
+                menuBtn.textContent = "☰";
+
+            });
+
+        });
+
+
+        // -------------------------
+        // FAQ ACCORDION
+        // -------------------------
+
+        const faqQuestions =
+            document.querySelectorAll(".faq-question");
+
+        faqQuestions.forEach(question => {
+
+            question.addEventListener("click", () => {
+
+                const item = question.parentElement;
+                const answer = item.querySelector(".faq-answer");
+
+                // Close other FAQ items
+
+                document
+                    .querySelectorAll(".faq-item")
+                    .forEach(otherItem => {
+
+                        if (otherItem !== item) {
+
+                            otherItem.classList.remove("active");
+
+                            otherItem
+                                .querySelector(".faq-answer")
+                                .style.maxHeight = null;
+                        }
+
+                    });
+
+
+                // Toggle selected item
+
+                item.classList.toggle("active");
+
+                if (item.classList.contains("active")) {
+
+                    answer.style.maxHeight =
+                        answer.scrollHeight + "px";
+
+                } else {
+
+                    answer.style.maxHeight = null;
+
+                }
+
+            });
+
+        });
+
+
+        // -------------------------
+        // SCROLL TO TOP
+        // -------------------------
+
+        const scrollTop =
+            document.getElementById("scrollTop");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 500) {
+
+                scrollTop.classList.add("show");
+
+            } else {
+
+                scrollTop.classList.remove("show");
+
+            }
+
+        });
+
+
+        scrollTop.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+
+        // -------------------------
+        // SMOOTH INTERNAL LINKS
+        // -------------------------
+
+        document
+            .querySelectorAll('a[href^="#"]')
+            .forEach(anchor => {
+
+                anchor.addEventListener("click", function (event) {
+
+                    const targetId =
+                        this.getAttribute("href");
+
+                    if (
+                        targetId === "#" ||
+                        !document.querySelector(targetId)
+                    ) {
+                        return;
+                    }
+
+                    event.preventDefault();
+
+                    document
+                        .querySelector(targetId)
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                });
+
+            });
+
+
+        // -------------------------
+        // SIMPLE BUTTON DEMO
+        // -------------------------
+
+        document
+            .querySelectorAll(".btn-primary")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    // Demo interaction.
+                    // Replace this with your real
+                    // signup/login functionality.
+
+                    console.log(
+                        "Nova button clicked!"
+                    );
+
+                });
+
+            });
+
+    </script>
+
+</body>
+</html>
